@@ -8,7 +8,7 @@ import { Router, ActivatedRoute } from "@angular/router";
   templateUrl: "./edit-user.component.html",
 })
 export class EditUserComponent implements OnInit {
-  userId: string | undefined;
+  userId: string | any;
 
   updateUserForm = this.fb.group({
     profile: [],
@@ -25,18 +25,18 @@ export class EditUserComponent implements OnInit {
     const id : any = this.route.snapshot.paramMap.get("id");
     this.userId = id;
 
-    // this.userService.getUserById(id).subscribe((user) => {
-    //   this.updateUserForm.patchValue({ profile: user });
-    // });
+    this.userService.getUserById(id).subscribe((user) => {
+      this.updateUserForm.patchValue({ profile: user });
+    });
   }
 
   updateUser() {
-    // const formValues = this.updateUserForm.value;
-    // const user = { id: this.userId, ...formValues.profile };
+    const formValues = this.updateUserForm.value;
+    const user = { id: this.userId, ...formValues.profile };
 
-    // this.userService.updateUser(user).subscribe(
-    //   () => this.router.navigate(["/admin/users"]),
-    //   () => alert("Cannot update user at this time!")
-    // );
+    this.userService.updateUser(user).subscribe(
+      () => this.router.navigate(["/admin/users"]),
+      () => alert("Cannot update user at this time!")
+    );
   }
 }

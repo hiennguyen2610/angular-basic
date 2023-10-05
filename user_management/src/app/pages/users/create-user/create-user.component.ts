@@ -20,16 +20,16 @@ export class CreateUserComponent {
   ) {}
 
   createUser() {
-    // const formValues = this.createUserForm.value;
-    // this.userService
-    //   .createUser({
-    //     profile: formValues.profile,
-    //     password: formValues.password,
-    //   })
-    //   .subscribe(
-    //     () => this.router.navigate(["/admin/users"]),
-    //     () => alert("Cannot create user at this time!")
-    //   );
+    const formValues = this.createUserForm.value;
+    this.userService
+      .createUser({
+        profile: formValues.profile,
+        password: formValues.password,
+      })
+      .subscribe(
+        () => this.router.navigate(["/admin/users"]),
+        () => alert("Cannot create user at this time!")
+      );
   }
   
 }
